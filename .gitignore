@@ -10,3 +10,7 @@
 #!.yarn/cache
 .pnp.*
 .editorconfig
+
+tmp/
+env/
+build/
