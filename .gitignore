@@ -1,0 +1,12 @@
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# We use zero-installs but don't keep .yarn/cache and .pnp.cjs in git. Run 'yarn' to regenerate it in new branch.
+# Documentation here: https://yarnpkg.com/getting-started/qa https://yarnpkg.com/features/zero-installs
+#!.yarn/cache
+.pnp.*
+.editorconfig
