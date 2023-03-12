@@ -1,15 +1,13 @@
 {
     "name": "ton-token-contract",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "description": "TON NFT and SBT smart contracts",
-    "main": "index.ts",
+    "main": "",
     "scripts": {
-        "start": "yarn get",
-        "build": "func-js stdlib.fc counter.fc --boc build/counter.cell",
-        "deploy": "ts-node deploy.ts",
-        "get": "ts-node get.ts",
-        "send": "ts-node send.ts",
-        "test": "jest"
+        "start": "yarn run",
+        "build": "yarn blueprint build",
+        "run": "yarn blueprint run",
+        "test": "none"
     },
     "keywords": [],
     "author": "CEO",
@@ -17,6 +15,7 @@
     "packageManager": "yarn@3.4.1",
     "dependencies": {
         "@orbs-network/ton-access": "^2.3.0",
+        "bn.js": "^5.2.1",
         "dotenv": "^16.0.3",
         "ton": "^13.4.1",
         "ton-core": "^0.48.0",
@@ -26,6 +25,7 @@
         "@ton-community/blueprint": "^0.4.1",
         "@ton-community/sandbox": "^0.5.1",
         "@ton-community/test-utils": "^0.0.2",
+        "@types/bn.js": "^5.1.1",
         "@types/jest": "^29.2.6",
         "@types/node": "^18.14.6",
         "jest": "^29.3.1",

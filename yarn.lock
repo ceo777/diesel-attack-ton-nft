@@ -970,7 +970,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bn.js@npm:^5.1.0":
+"@types/bn.js@npm:^5.1.0, @types/bn.js@npm:^5.1.1":
   version: 5.1.1
   resolution: "@types/bn.js@npm:5.1.1"
   dependencies:
@@ -1345,7 +1345,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bn.js@npm:^5.2.0":
+"bn.js@npm:^5.2.0, bn.js@npm:^5.2.1":
   version: 5.2.1
   resolution: "bn.js@npm:5.2.1"
   checksum: 3dd8c8d38055fedfa95c1d5fc3c99f8dd547b36287b37768db0abab3c239711f88ff58d18d155dd8ad902b0b0cee973747b7ae20ea12a09473272b0201c9edd3
@@ -4103,8 +4103,10 @@ __metadata:
     "@ton-community/blueprint": ^0.4.1
     "@ton-community/sandbox": ^0.5.1
     "@ton-community/test-utils": ^0.0.2
+    "@types/bn.js": ^5.1.1
     "@types/jest": ^29.2.6
     "@types/node": ^18.14.6
+    bn.js: ^5.2.1
     dotenv: ^16.0.3
     jest: ^29.3.1
     prettier: ^2.8.3
