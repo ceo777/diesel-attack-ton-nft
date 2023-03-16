@@ -1,8 +1,8 @@
 {
     "name": "diesel-attack-nft-backend",
-    "version": "0.8.7",
+    "version": "2.0.1",
     "description": "Diesel Attack NFT Game backend API server minting NFTs and SBTs for players",
-    "main": "scripts/dieselAttackNft.ts",
+    "main": "server",
     "scripts": {
         "start": "yarn ts-node scripts/dieselAttackNft.ts",
         "build": "yarn blueprint build",
@@ -19,6 +19,7 @@
     "dependencies": {
         "@orbs-network/ton-access": "^2.3.0",
         "dotenv": "^16.0.3",
+        "fastify": "^4.14.1",
         "ton": "^13.4.1",
         "ton-core": "^0.48.0",
         "ton-crypto": "^3.2.0",
@@ -29,11 +30,12 @@
         "@ton-community/sandbox": "^0.5.1",
         "@ton-community/test-utils": "^0.0.2",
         "@types/jest": "^29.2.6",
-        "@types/node": "^18.14.6",
+        "@types/node": "^18.15.3",
         "jest": "^29.3.1",
         "prettier": "^2.8.3",
         "ts-jest": "^29.0.5",
         "ts-node": "^10.9.1",
+        "tslib": "^2.5.0",
         "typescript": "^4.9.5"
     }
 }
