@@ -19,6 +19,7 @@ export default class DieselAttackNft {
     public nftCollectionAddress = '';
 
     public async connect() {
+        console.log('Request is received. Initialize...');
         await this.connectToProvider()
         await this.getKeysFromSecretKey();
         await this.WalletInitialize();
@@ -32,7 +33,7 @@ export default class DieselAttackNft {
         if (!this.tonweb) {
             return console.log('Cannot connect to the Blockchain HTTP Provider.');
         }
-        console.log('Successfully connected to the Blockchain HTTP Provider.');
+        console.log('Connected to the Blockchain HTTP Provider successfully.');
     }
 
     protected async getKeysFromSecretKey() {
@@ -142,15 +143,29 @@ export default class DieselAttackNft {
                 sendMode: 3,
             }).send()
         );
-        const nftItemAddress: string = (await this.nftCollection.getNftItemAddressByIndex(nextItemIndex)).toString(true, true, true); // TODO: try-catch!
-        if (nftItemAddress) {
+        try {
+            const nftItemAddress: string = (await this.nftCollection.getNftItemAddressByIndex(nextItemIndex)).toString(true, true, true);
             console.log('NFT item is successfully deployed on address: https://testnet.tonscan.org/nft/' + nftItemAddress);
-            return nftItemAddress;
         }
-        else {
+        catch (err) {
             console.log('NFT item hasn\'t been deployed!');
-            return false;
+            console.log(err);
+            // if (typeof err === "string") {
+            //     return err.toUpperCase();
+            // } else if (err instanceof Error) {
+            //     return err.message;
+            // }
+            return err;
         }
+
+        // if (nftItemAddress) {
+        //     console.log('NFT item is successfully deployed on address: https://testnet.tonscan.org/nft/' + nftItemAddress);
+        //     return nftItemAddress;
+        // }
+        // else {
+        //     console.log('NFT item hasn\'t been deployed!');
+        //     return false;
+        // }
     }
 
     public async getCollection() {
@@ -176,6 +191,7 @@ export default class DieselAttackNft {
         data.collectionAddress = data.collectionAddress.toString(true, true, true);
         data.ownerAddress = data.ownerAddress?.toString(true, true, true);
         console.log(data);
+        console.log('NFT item data is successfully retrieved.');
 
         return data;
     }

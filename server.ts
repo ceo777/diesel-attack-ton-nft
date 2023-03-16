@@ -1,3 +1,4 @@
+import * as process from 'process';
 import Fastify, { FastifyInstance } from 'fastify';
 import routes from './routes/api';
 /**
@@ -10,7 +11,6 @@ const fastify : FastifyInstance = Fastify({
         file: './api.log'
     }
 });
-
 
 fastify.register(routes);
 

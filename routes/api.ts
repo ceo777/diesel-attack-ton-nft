@@ -29,10 +29,11 @@ async function routes(fastify: FastifyInstance, options: Object) {
             }
         }
     }
+    const version = '/v2';
 
-    fastify.get('/', home);
-    fastify.get('/mint-nft', nftOptions, mintNft);
-    // fastify.get('/mint-sbt', sbtOptions, mintSbt);
+    fastify.get(version + '/', home);
+    fastify.get(version + '/mint-nft', nftOptions, mintNft);
+    // fastify.get(version + '/mint-sbt', sbtOptions, mintSbt);
 }
 
 export default routes;
