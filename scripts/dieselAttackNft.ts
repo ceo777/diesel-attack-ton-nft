@@ -136,9 +136,9 @@ export default class DieselAttackNft {
                 seqno: seqno,
                 payload: await this.nftCollection.createMintBody({
                     amount,
-                    itemIndex: nextItemIndex,
+                    itemIndex: nextItemIndex,  // TODO: double check!
                     itemOwnerAddress: recipientAddress,
-                    itemContentUri: nftContent + '.json'
+                    itemContentUri: nftContent
                 }),
                 sendMode: 3,
             }).send()
