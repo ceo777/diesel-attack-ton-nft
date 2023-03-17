@@ -19,6 +19,7 @@ const mintSbt = async (request: FastifyRequest, reply: FastifyReply) => {
         success: false,
         rewardType: 'level',
         rewardNum: level,
+        link: '',
         errorMsg: ''
     }
     if (apikey !== process.env.APIKEY && apikey !== process.env.TEMP_KEY) {
@@ -42,8 +43,8 @@ const mintSbt = async (request: FastifyRequest, reply: FastifyReply) => {
         deployed = await collection.deployItem(id, sbt);
         response.success = true;
         if (deployed) {
-            console.log('Success! SBT has been minted on address: https://testnet.tonscan.org/nft/' + deployed);
-            fastify.log.info('Success! SBT has been minted for on address: https://testnet.tonscan.org/nft/' + deployed);
+            response.link = 'https://tonscan.org/nft/' + deployed;
+            fastify.log.info('Success! NFT has been minted on address: ' + response.link);
         }
     } catch (err) {
         if (typeof err === "string") {

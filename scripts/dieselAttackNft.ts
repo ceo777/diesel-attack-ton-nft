@@ -144,6 +144,7 @@ export default class DieselAttackNft {
         try {
             const nftItemAddress: string = (await this.nftCollection.getNftItemAddressByIndex(nextItemIndex)).toString(true, true, true);
             console.log('NFT item is successfully deployed on address: https://tonscan.org/nft/' + nftItemAddress);
+            return nftItemAddress;
         }
         catch (err) {
             console.log('NFT item hasn\'t been deployed!');
@@ -153,7 +154,7 @@ export default class DieselAttackNft {
             // } else if (err instanceof Error) {
             //     return err.message;
             // }
-            return err;
+            // return err;
         }
 
         // if (nftItemAddress) {

@@ -1,6 +1,6 @@
 {
     "name": "diesel-attack-nft-backend",
-    "version": "2.1.1",
+    "version": "2.1.5",
     "description": "Diesel Attack NFT Game backend API server minting NFTs and SBTs for players",
     "main": "server",
     "scripts": {

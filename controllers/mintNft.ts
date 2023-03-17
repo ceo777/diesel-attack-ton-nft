@@ -47,6 +47,7 @@ const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
         success: false,
         rewardType: '',
         rewardNum: 0,
+        link: '',
         errorMsg: ''
     }
     if (apikey !== process.env.APIKEY && apikey !== process.env.TEMP_KEY) {
@@ -63,7 +64,7 @@ const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
     const reward = gacha();
     const nft = 'gun-' + reward + '.json';
 
-    const msg = 'Deploying new NFT item for https://testnet.tonscan.org/nft/' + id;
+    const msg = 'Deploying new NFT item for https://tonscan.org/nft/' + id;
     console.log(msg);
     fastify.log.info(msg);
 
@@ -73,8 +74,8 @@ const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
         response.rewardType = 'gun';
         response.rewardNum = reward as number;
         if (deployed) {
-            console.log('Success! NFT has been minted on address: https://testnet.tonscan.org/nft/' + deployed);
-            fastify.log.info('Success! NFT has been minted for on address: https://testnet.tonscan.org/nft/' + deployed);
+            response.link = 'https://tonscan.org/nft/' + deployed;
+            fastify.log.info('Success! NFT has been minted on address: ' + response.link);
         }
     } catch (err) {
         if (typeof err === "string") {
