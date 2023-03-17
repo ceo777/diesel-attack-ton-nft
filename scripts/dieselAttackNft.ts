@@ -26,9 +26,7 @@ export default class DieselAttackNft {
         await this.nftCollectionInitialize();
     }
     protected async connectToProvider() {
-        const endpoint = await getHttpEndpoint({
-            network: "testnet" // TODO: mainnet!
-        });
+        const endpoint = await getHttpEndpoint({});
         this.tonweb = new TonWeb(new TonWeb.HttpProvider(endpoint));
         if (!this.tonweb) {
             return console.log('Cannot connect to the Blockchain HTTP Provider.');
@@ -66,7 +64,7 @@ export default class DieselAttackNft {
             return console.log("Cannot initialize the wallet.");
         }
         console.log('Wallet is successfully initialized.');
-        console.log('Wallet address: https://testnet.tonscan.org/nft/' + this.walletAddress.toString(true, true, true));
+        console.log('Wallet address: https://tonscan.org/nft/' + this.walletAddress.toString(true, true, true));
     }
 
     protected async nftCollectionInitialize() {
@@ -86,7 +84,7 @@ export default class DieselAttackNft {
             code: collectionCode || ''
         });
         this.nftCollectionAddress = (await this.nftCollection.getAddress()).toString(true, true, true);
-        console.log('Collection address:https://testnet.tonscan.org/nft/' + this.nftCollectionAddress);
+        console.log('Collection address:https://tonscan.org/nft/' + this.nftCollectionAddress);
     }
 
     public async deployCollection(){
@@ -145,7 +143,7 @@ export default class DieselAttackNft {
         );
         try {
             const nftItemAddress: string = (await this.nftCollection.getNftItemAddressByIndex(nextItemIndex)).toString(true, true, true);
-            console.log('NFT item is successfully deployed on address: https://testnet.tonscan.org/nft/' + nftItemAddress);
+            console.log('NFT item is successfully deployed on address: https://tonscan.org/nft/' + nftItemAddress);
         }
         catch (err) {
             console.log('NFT item hasn\'t been deployed!');
@@ -159,7 +157,7 @@ export default class DieselAttackNft {
         }
 
         // if (nftItemAddress) {
-        //     console.log('NFT item is successfully deployed on address: https://testnet.tonscan.org/nft/' + nftItemAddress);
+        //     console.log('NFT item is successfully deployed on address: https://tonscan.org/nft/' + nftItemAddress);
         //     return nftItemAddress;
         // }
         // else {
