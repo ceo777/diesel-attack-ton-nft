@@ -5,7 +5,7 @@ import {config as envConfig} from "dotenv";
 import TonWeb, { AddressType } from 'tonweb';
 import { getHttpEndpoint } from "@orbs-network/ton-access";
 
-envConfig({ path: "env/wallet_key.env" });
+envConfig({ path: 'env/wallet_key.env' });
 
 export default class DieselAttackNft {
     protected tonweb!: TonWeb;
@@ -51,7 +51,7 @@ export default class DieselAttackNft {
     protected async WalletInitialize() {
         const walletVersion = process.env.WALLET_VERSION;
         if (!walletVersion) {
-            return console.log(".env cannot be found or WALLET_VERSION is empty.");
+            return console.log('.env cannot be found or WALLET_VERSION is empty.');
         }
         const WalletClass = this.tonweb.wallet.all['v4R2']; // TODO: get the wallet version from the .env
 
@@ -61,7 +61,7 @@ export default class DieselAttackNft {
         });
         this.walletAddress = await this.wallet.getAddress();
         if (!this.walletAddress) {
-            return console.log("Cannot initialize the wallet.");
+            return console.log('Cannot initialize the wallet.');
         }
         console.log('Wallet is successfully initialized.');
         console.log('Wallet address: https://tonscan.org/nft/' + this.walletAddress.toString(true, true, true));
@@ -104,17 +104,16 @@ export default class DieselAttackNft {
             }).send()
         );
 
-        // save address to .env
-        // fs.writeFile('env/nft_collection_address.env', 'CONTRACT_ADDRESS="' + this.nftCollectionAddress + '"', 'utf8', err => {
-        //     if (err) {
-        //         console.error(err);
-        //     }
-        //     console.log('NFT Collection is successfully deployed!');
-        //     console.log("Contract address is saved to /env/nft_collection_address.env");
-        // });
-        fs.writeFileSync('env/nft_collection_address.env', 'CONTRACT_ADDRESS="' + this.nftCollectionAddress + '"', 'utf8');
-        console.log('NFT Collection is successfully deployed!');
-        console.log("Contract address is saved to /env/nft_collection_address.env");
+        try {
+            fs.writeFileSync('env/nft_collection_address.env', 'CONTRACT_ADDRESS="' + this.nftCollectionAddress + '"', 'utf8');
+            console.log('NFT Collection is successfully deployed!');
+            console.log('Contract address is saved to /env/nft_collection_address.env');
+        }
+        catch (err) {
+            console.log('Contract address hasn\'t been saved.');
+            return err;
+        }
+
     }
 
     public async deployItem(playerAddress: string, nftContent: string) {
@@ -134,7 +133,7 @@ export default class DieselAttackNft {
                 seqno: seqno,
                 payload: await this.nftCollection.createMintBody({
                     amount,
-                    itemIndex: nextItemIndex,  // TODO: double check!
+                    itemIndex: nextItemIndex,
                     itemOwnerAddress: recipientAddress,
                     itemContentUri: nftContent
                 }),
@@ -156,15 +155,6 @@ export default class DieselAttackNft {
             // }
             // return err;
         }
-
-        // if (nftItemAddress) {
-        //     console.log('NFT item is successfully deployed on address: https://tonscan.org/nft/' + nftItemAddress);
-        //     return nftItemAddress;
-        // }
-        // else {
-        //     console.log('NFT item hasn\'t been deployed!');
-        //     return false;
-        // }
     }
 
     public async getCollection() {
@@ -182,7 +172,7 @@ export default class DieselAttackNft {
 
     public async getItem(nftIndex: number) {
         // const index = new this.BN(nftIndex) || 0;
-        const nftItemAddress: AddressType = await this.nftCollection.getNftItemAddressByIndex(nftIndex); // TODO: try-catch!
+        const nftItemAddress: AddressType = await this.nftCollection.getNftItemAddressByIndex(nftIndex); // TODO: fetch it from DB or delay check?
         const nftItem = new TonWeb.token.nft.NftItem(this.tonweb.provider, {address: nftItemAddress});
         const data = await this.nftCollection.methods.getNftItemContent(nftItem);
         data.itemAddress = nftItemAddress.toString(true, true, true);
@@ -195,16 +185,3 @@ export default class DieselAttackNft {
         return data;
     }
 }
-
-// async function run() {
-//     const playerAddress = 'EQCaIiWWLBEKv234jlvayBLrY4d9L8_hZTpBUN-FWxOKHuwC';
-//     const nft = 'gun-1' // TODO: Gacha!
-//     const nftCollection = new DieselAttackNft();
-//     await nftCollection.connect();
-//     // await nftCollection.deployCollection();
-//     // await nftCollection.getCollection();
-//     // await nftCollection.deployItem(playerAddress, nft);
-//     // await nftCollection.getItem(3);
-// }
-//
-// run();

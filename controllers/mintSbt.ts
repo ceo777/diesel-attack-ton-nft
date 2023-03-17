@@ -1,7 +1,7 @@
 import * as process from 'process';
 import {config as envConfig} from "dotenv";
 import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import DieselAttackSbt from '../scripts/dieselAttackSbt';
+import DieselAttackSbt from '../wrappers/dieselAttackSbt';
 
 envConfig({ path: "env/apikey.env" });
 

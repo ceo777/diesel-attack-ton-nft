@@ -1,7 +1,7 @@
 import * as process from 'process';
 import {config as envConfig} from "dotenv";
 import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import DieselAttackNft from '../scripts/dieselAttackNft';
+import DieselAttackNft from '../wrappers/dieselAttackNft';
 
 envConfig({ path: "env/apikey.env" });
 
