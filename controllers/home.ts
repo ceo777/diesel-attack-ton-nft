@@ -9,7 +9,7 @@ const fastify : FastifyInstance = Fastify({
 });
 
 const home = async (request: FastifyRequest, reply: FastifyReply) => {
-    return 'Diesel Attack NFT Game Backend API Server 2.1.5';
+    return 'Diesel Attack NFT Game Backend API Server 2.1.7';
 }
 
 export default home;

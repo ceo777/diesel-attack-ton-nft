@@ -4,7 +4,7 @@ export default async function deploy() {
     const nftCollection = new DieselAttackNft();
     await nftCollection.connect();
     await nftCollection.deployCollection();
-    await nftCollection.getCollection();
+    // await nftCollection.getCollection();
 }
 
 deploy();

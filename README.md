@@ -1,5 +1,3 @@
-:warning: This is not the final version yet! Please be patient :)
-
 # Diesel Attack NFT Game Backend API Server
 
 Welcome to the cyberpunk post-apocalyptic world of Diesel Attack
@@ -12,7 +10,8 @@ Diesel Attack is a hardcore 2D-platformer with web3 economy based on utility NFT
 
 ![Diesel Attack NFT Game banner 1200x600](/docs/img/diesel-attack-banner_1200x600.jpg)
 
->To earn TON coins and collect NFTs and SBTs during the game you need a [TON Wallet](https://ton.org/en/wallets). We never ask you for keys.
+>To earn TON coins and collect NFTs and SBTs during the game you need a [TON Wallet](https://ton.org/en/wallets). 
+>We never ask you for keys.
 
 
 <details open="open">

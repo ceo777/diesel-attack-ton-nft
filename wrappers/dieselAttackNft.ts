@@ -53,7 +53,7 @@ export default class DieselAttackNft {
         if (!walletVersion) {
             return console.log('.env cannot be found or WALLET_VERSION is empty.');
         }
-        const WalletClass = this.tonweb.wallet.all['v4R2']; // TODO: get the wallet version from the .env
+        const WalletClass = this.tonweb.wallet.all['v3R2']; // TODO: get the wallet version from the .env
 
         this.wallet = new WalletClass(this.tonweb.provider, {
             publicKey: this.keyPair.publicKey,
@@ -79,12 +79,12 @@ export default class DieselAttackNft {
             collectionContentUri: 'https://dieselattack.com/metadata/nft/nft-collection.json',
             nftItemContentBaseUri: 'https://dieselattack.com/metadata/nft/',
             nftItemCodeHex: itemCode || TonWeb.token.nft.NftItem.codeHex,
-            royalty: 0.15,
+            royalty: 0.05,
             royaltyAddress: address,
             code: collectionCode || ''
         });
         this.nftCollectionAddress = (await this.nftCollection.getAddress()).toString(true, true, true);
-        console.log('Collection address:https://tonscan.org/nft/' + this.nftCollectionAddress);
+        console.log('Collection address: https://tonscan.org/nft/' + this.nftCollectionAddress);
     }
 
     public async deployCollection(){
@@ -158,7 +158,7 @@ export default class DieselAttackNft {
     }
 
     public async getCollection() {
-        const data = await this.nftCollection.getCollectionData();
+        const data = await this.nftCollection.getCollectionData();  // TODO: more stable solution!
         data.itemsCount = data.itemsCount.toString();
         data.ownerAddress = data.ownerAddress?.toString(true, true, true);
         console.log(data);

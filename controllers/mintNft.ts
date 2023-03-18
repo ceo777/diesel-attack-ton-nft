@@ -41,6 +41,10 @@ function gacha() {
 }
 
 const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
+    reply.header('Access-Control-Allow-Credentials', 'true');
+    reply.header('Access-Control-Allow-Headers', 'Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time');
+    reply.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    reply.header('Access-Control-Allow-Origin', '*'); // TODO: to be edited later!
     const { id, apikey } = request.query as any;
     let deployed: string | unknown;
     let response = {
