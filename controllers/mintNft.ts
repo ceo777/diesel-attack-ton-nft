@@ -68,7 +68,7 @@ const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
     const reward = gacha();
     const nft = 'gun-' + reward + '.json';
 
-    const msg = 'Deploying new NFT item for https://tonscan.org/nft/' + id;
+    const msg = 'Deploying new NFT item for https://tonscan.org/address/' + id;
     console.log(msg);
     fastify.log.info(msg);
 

@@ -4,7 +4,7 @@ Welcome to the cyberpunk post-apocalyptic world of Diesel Attack
 
 https://dieselattack.com
 
-Diesel Attack is a hardcore 2D-platformer with web3 economy based on utility NFTs and SBTs on [TON blockchain](https://ton.org).
+Diesel Attack is a hardcore 2D-platformer with web3 economy based on utility NFTs and SBTs on [TON blockchain](https://ton.org). Desktop web version for now, mobile apps are coming soon.
 
 
 
@@ -62,6 +62,7 @@ When a game client app sends a request to the server using API, a player gets a 
 - Smart contract storing players database completely on-chain
 - Smart contract funding and distributing Prize Pool
 - TWA dapp for voting and for quick access to leaderboard on-the-go
+- iOS and Android client apps, mobile web version
 
 
 
@@ -73,30 +74,48 @@ When a game client app sends a request to the server using API, a player gets a 
 
 #### Status
 
-`GET /` returns greetings message (server status check)
+Request:
+
+`GET /v2/` returns greetings message (server status check)
+
+Response:
+
+`Diesel Attack NFT Game Backend API Server 2.1.7`
 
 Production server endpoint:
 
-https://api.dieselattack.com
+https://api.dieselattack.com/v2/
 
 #### Mint NFT
 
-`GET /v2/mint-nft?id=<address>&apikey=<secret_token>` mints NFT for player and returns an id of the collectible to the game client app. Where `<address>` is the player's TON wallet address on the mainnet. And `<apikey>` is a client app hashed secret token. The response time is only about 2 seconds.
+Request:
+
+`GET /v2/mint-nft?id=<address>&apikey=<secret_token>` mints NFT for player and returns an id of the collectible (weapons for now) and explorer link to the game client app. Where `<address>` is the player's TON wallet address on the mainnet. And `<apikey>` is a client app hashed secret token. The response is time less than 1 second.
+
+Response:
+
+`{ "success": <true/false>, "rewardType": <gun/ship/shield>,"rewardNum": <index>, "link": <just minted nft on blockchain explorer>, "errorMsg": <error message if any> }`
 
 Production server endpoint:
 
 https://api.dieselattack.com/v2/mint-nft?id=EQBiKxj6DSyPRnK4Rg92hRX03Anw5FOXfEbFj6uTnfyln8CS&apikey=e0965cbdf5ba6694039715cf642b44d9a007607294daf4579d8fff62a52016ba
 
-
-#### Mint SBT (not implemented yet)
-
-`GET /v2/mint-sbt?id=<address>&level=<number>&apikey=<secret_token>` mints SBT for player and returns an id of the collectible to a game client app. Where `<address>` is the player's TON wallet address on the mainnet, `<level>` is an id of the completed level in the game. And `<apikey>` is a client app hashed secret token. The response time is only about 2 seconds.
-
-Production server endpoint:
-
-https://api.dieselattack.com/v2/mint-sbt?id=EQBiKxj6DSyPRnK4Rg92hRX03Anw5FOXfEbFj6uTnfyln8CS&level=1&apikey=e0965cbdf5ba6694039715cf642b44d9a007607294daf4579d8fff62a52016ba
-
 >Until 31.03 you can check it out by yourself and mint NFT to your TON wallet. Just put your TON wallet address instead of `address`. No keys needed. Browse it and check your wallet NFT section.
+
+
+#### Mint SBT
+
+Request:
+
+`GET /v2/mint-sbt?id=<address>&reward=<type>&num=<index>&apikey=<secret_token>` mints SBT for player and returns an id of the collectible and explorer link to a game client app. Where `<address>` is the player's TON wallet address on the mainnet, `<type>` is a type of the reward in the game,  `<index>` is an id of the reward. And `<apikey>` is a client app hashed secret token.
+
+Response:
+
+`{ "success": <true/false>, "link": <just minted sbt on blockchain explorer>, "errorMsg": <error message if any> }`
+
+Production server endpoint (not implemented yet):
+
+https://api.dieselattack.com/v2/mint-sbt?id=EQBiKxj6DSyPRnK4Rg92hRX03Anw5FOXfEbFj6uTnfyln8CS&reward=level&num=1&apikey=e0965cbdf5ba6694039715cf642b44d9a007607294daf4579d8fff62a52016ba
 
 
 ### Security
@@ -128,7 +147,7 @@ References to the original documentation:
 
 ### Build the contract
 
->Compiled smart contracts HEX code is to be written to the `build` directory in project root. It must be created before building.
+>FunC smart contracts will be compiled and saved as HEX code into the `build` directory in project root. It must be created with appropriate access permissions before building.
 
 1. Install all the dependencies:
     ```sh
@@ -143,7 +162,7 @@ References to the original documentation:
 
 ### Deploy to the mainnet
 
-> Credentials are stored in `env` directory in project root and used as environment variables. It must be created before deploying.
+> Credentials are stored in `env` directory in project root and used as environment variables. It must be created with appropriate access permissions before deploying.
 > 
 > It should contain the next files:
 > 
