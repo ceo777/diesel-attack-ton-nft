@@ -2,7 +2,7 @@
 
 Welcome to the cyberpunk post-apocalyptic world of Diesel Attack
 
-https://play.dieselattack.com
+https://dieselattack.com
 
 Diesel Attack is a hardcore 2D-platformer with web3 economy based on utility NFTs and SBTs on [TON blockchain](https://ton.org).
 
@@ -53,11 +53,11 @@ When a game client app sends a request to the server using API, a player gets a 
 - Unity WebGL client app (the game)
 - Backend API server handling requests
 - Smart contract minting NFTs on the fly
+- TON Connect 2.0 Unity WebGL integration
 
 
 ### To be done
 
-- TON Connect 2.0 UI
 - Smart contract minting SBTs on the fly
 - Smart contract storing players database completely on-chain
 - Smart contract funding and distributing Prize Pool
@@ -128,6 +128,8 @@ References to the original documentation:
 
 ### Build the contract
 
+>Compiled smart contracts HEX code is to be written to the `build` directory in project root. It must be created before building.
+
 1. Install all the dependencies:
     ```sh
     yarn
@@ -140,6 +142,14 @@ References to the original documentation:
 
 
 ### Deploy to the mainnet
+
+> Credentials are stored in `env` directory in project root and used as environment variables. It must be created before deploying.
+> 
+> It should contain the next files:
+> 
+> `apikey.env` with `APIKEY=""` in it - client app secret token.
+> `wallet_key.env` with `SECRET_KEY=""` in it - contract owner wallet secret key in Base64 encoding.
+
 
 1. Deploy the contract to the TON mainnet (workchain 0):
     ```sh
@@ -154,12 +164,7 @@ References to the original documentation:
 
 ### Tests
 
-- Run the smart contract test:
+- Run the smart contract test: (not implemented yet)
     ```sh
     yarn test
-    ```
-
-- Run the server app test:
-    ```sh
-    yarn test:server
     ```
