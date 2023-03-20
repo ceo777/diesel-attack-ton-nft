@@ -80,7 +80,7 @@ Request:
 
 Response:
 
-`Diesel Attack NFT Game Backend API Server 2.1.7`
+`Diesel Attack NFT Game Backend API Server 2.1.8`
 
 Production server endpoint:
 
@@ -90,7 +90,7 @@ https://api.dieselattack.com/v2/
 
 Request:
 
-`GET /v2/mint-nft?id=<address>&apikey=<secret_token>` mints NFT for player and returns an id of the collectible (weapons for now) and explorer link to the game client app. Where `<address>` is the player's TON wallet address on the mainnet. And `<apikey>` is a client app hashed secret token. The response is time less than 1 second.
+`GET /v2/mint-nft?id=<address>&apikey=<secret_token>` mints NFT for player and returns an id of the collectible (weapons for now) and a link to just minted nft on explorer. Where `<address>` is the player's TON wallet friendly address on the mainnet. And `<secret_token>` is a client app hashed secret token. The response time is less than 1 second.
 
 Response:
 
@@ -107,7 +107,7 @@ https://api.dieselattack.com/v2/mint-nft?id=EQBiKxj6DSyPRnK4Rg92hRX03Anw5FOXfEbF
 
 Request:
 
-`GET /v2/mint-sbt?id=<address>&reward=<type>&num=<index>&apikey=<secret_token>` mints SBT for player and returns an id of the collectible and explorer link to a game client app. Where `<address>` is the player's TON wallet address on the mainnet, `<type>` is a type of the reward in the game,  `<index>` is an id of the reward. And `<apikey>` is a client app hashed secret token.
+`GET /v2/mint-sbt?id=<address>&reward=<type>&num=<index>&apikey=<secret_token>` mints SBT for player and returns an id of the collectible and a link to just minted sbt on explorer. Where `<address>` is the player's TON wallet address on the mainnet, `<type>` is a type of the reward in the game,  `<index>` is an id of the reward. And `<secret_token>` is a client app hashed secret token.
 
 Response:
 
@@ -140,10 +140,6 @@ References to the original documentation:
 - [Node.js](https://nodejs.org/en/download/package-manager/)
 - [Yarn](https://yarnpkg.com/getting-started/install)
 
-<details>
-<summary>Installing the prerequisites</summary>
-</details>
-
 
 ### Build the contract
 
@@ -168,6 +164,8 @@ References to the original documentation:
 > 
 > `apikey.env` with `APIKEY=""` in it - client app secret token.
 > `wallet_key.env` with `SECRET_KEY=""` in it - contract owner wallet secret key in Base64 encoding.
+>
+> Server generates `api.log` file in project root directory. It must have appropriate access permissions.
 
 
 1. Deploy the contract to the TON mainnet (workchain 0):
@@ -179,7 +177,6 @@ References to the original documentation:
     ```sh
     yarn start
     ```
-
 
 ### Tests
 
