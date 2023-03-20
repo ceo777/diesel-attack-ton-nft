@@ -1,6 +1,6 @@
 import home from '../controllers/home';
 import mintNft from '../controllers/mintNft';
-// import mintSbt from '../controllers/mintSbt';
+import mintSbt from '../controllers/mintSbt';
 import { FastifyInstance } from 'fastify';
 /**
  * Encapsulates the routes
@@ -24,7 +24,8 @@ async function routes(fastify: FastifyInstance, options: Object) {
             // mint-sbt request should have a querystring with a `id`, `level` and `apikey` parameters
             querystring: {
                 id: {type: 'string'},
-                level: {type: 'string'},
+                reward: {type: 'string'},
+                num: {type: 'number'},
                 apikey: {type: 'string'}
             }
         }
@@ -33,7 +34,7 @@ async function routes(fastify: FastifyInstance, options: Object) {
 
     fastify.get(version + '/', home);
     fastify.get(version + '/mint-nft', nftOptions, mintNft);
-    // fastify.get(version + '/mint-sbt', sbtOptions, mintSbt);
+    fastify.get(version + '/mint-sbt', sbtOptions, mintSbt);
 }
 
 export default routes;

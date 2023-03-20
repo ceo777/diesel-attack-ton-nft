@@ -23,19 +23,19 @@ function gacha() {
     const rand: number = random(0, 100);
     switch (true) {
         case (rand < 35):
-            console.log({rand});
+            // return { type: 'gun', index: 1, nft: 'https://bafkreid72iyjdpa6ktk7cqgmea4xx3nhxucihap6znmufa7d4vhfplhlne.ipfs.nftstorage.link' };
             return 1;
         case (rand < 63):
-            console.log({rand});
+            // return { type: 'gun', index: 2, nft: 'https://bafkreif5tlynfd27jcky4y6bwfg5lkw7ylazs522tivi5xd6tl3s7paldi.ipfs.nftstorage.link' };
             return 2;
         case (rand < 83):
-            console.log({rand});
+            // return { type: 'gun', index: 3, nft: 'https://bafkreigg55elpxe6esis5btkdta43nhk5s2dzmyxvfuiaeftvmos5fiukm.ipfs.nftstorage.link' };
             return 3;
         case (rand < 95):
-            console.log({rand});
+            // return { type: 'gun', index: 4, nft: 'https://bafkreighwkns5fu4nlmhvvxtqtxodkmyoczshvzz4sjyzxnaz2qhwnewsm.ipfs.nftstorage.link' };
             return 4;
         case (rand < 100):
-            console.log({rand});
+            // return { type: 'gun', index: 5, nft: 'https://bafkreigbiedieybze4oee5tb5ykjbqjyfkh6xqjxo7wvu3tpy7xswkby5u.ipfs.nftstorage.link' };
             return 5;
     }
 }
@@ -65,30 +65,40 @@ const mintNft = async (request: FastifyRequest, reply: FastifyReply) => {
 
     const collection = new DieselAttackNft();
     await collection.connect();
-    const reward = gacha();
-    const nft = 'gun-' + reward + '.json';
 
-    const msg = 'Deploying new NFT item for https://tonscan.org/address/' + id;
-    console.log(msg);
-    fastify.log.info(msg);
+    // Ready to store metadata completely on IPFS and to add other rewards in the game
+    // const reward: {type: string, index: number, nft: string} | undefined = gacha();
+    const reward: number | undefined = gacha();
+    const nft: string = 'gun-' + reward +'.json';
 
-    try {
-        deployed = await collection.deployItem(id, nft);
-        response.success = true;
-        response.rewardType = 'gun';
-        response.rewardNum = reward as number;
-        if (deployed) {
-            response.link = 'https://tonscan.org/nft/' + deployed;
-            fastify.log.info('Success! NFT has been minted on address: ' + response.link);
+    if (reward) {
+        const msg = 'Deploying new NFT item for https://tonscan.org/address/' + id;
+        console.log(msg);
+        fastify.log.info(msg);
+
+        try {
+            deployed = await collection.deployItem(id, nft);  // reward.nft
+            response.success = true;
+            response.rewardType = 'gun'; // reward.type
+            response.rewardNum = reward // reward.index
+            if (deployed) {
+                response.link = 'https://tonscan.org/nft/' + deployed;
+                fastify.log.info('Success! NFT has been minted on address: ' + response.link);
+            }
+        } catch (err) {
+            if (typeof err === "string") {
+                response.errorMsg = err.toUpperCase();
+            } else if (err instanceof Error) {
+                response.errorMsg = err.message;
+            }
+            console.log(err);
+            fastify.log.error(err);
         }
-    } catch (err) {
-        if (typeof err === "string") {
-            response.errorMsg = err.toUpperCase();
-        } else if (err instanceof Error) {
-            response.errorMsg = err.message;
-        }
-        console.log(err);
-        fastify.log.error(err);
+    }
+    else {
+        const msg = response.errorMsg = 'Gacha function error. Really bad luck! :D'; // impossible
+        console.log(msg);
+        fastify.log.info(msg);
     }
 
     return JSON.stringify(response);

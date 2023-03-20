@@ -64,7 +64,7 @@ export default class DieselAttackNft {
             return console.log('Cannot initialize the wallet.');
         }
         console.log('Wallet is successfully initialized.');
-        console.log('Wallet address: https://tonscan.org/nft/' + this.walletAddress.toString(true, true, true));
+        console.log('Wallet address: https://tonscan.org/address/' + this.walletAddress.toString(true, true, true));
     }
 
     protected async nftCollectionInitialize() {
@@ -84,7 +84,7 @@ export default class DieselAttackNft {
             code: collectionCode || ''
         });
         this.nftCollectionAddress = (await this.nftCollection.getAddress()).toString(true, true, true);
-        console.log('Collection address: https://tonscan.org/nft/' + this.nftCollectionAddress);
+        console.log('Collection address: https://tonscan.org/address/' + this.nftCollectionAddress);
     }
 
     public async deployCollection(){
@@ -96,7 +96,7 @@ export default class DieselAttackNft {
             await this.wallet.methods.transfer({
                 secretKey: this.keyPair.secretKey,
                 toAddress: this.nftCollectionAddress,
-                amount: TonWeb.utils.toNano('0.3'),
+                amount: TonWeb.utils.toNano('0.5'),
                 seqno: seqno,
                 payload: '',
                 sendMode: 3,
